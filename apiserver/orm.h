@@ -17,19 +17,19 @@
  * since:  0.1
  */
 
-#include "apiserver/server.h"
-#include <iostream>
+#ifndef SLIM_KUBE_ORM_H
+#define SLIM_KUBE_ORM_H
 
-int main() {
-    try {
-        boost::asio::io_context io_context;
-        Server server(io_context, 8080);
+#include <boost/asio.hpp>
+#include <libpq-fe.h>
 
-        // 运行IO循环
-        io_context.run();
-    } catch (const std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
-    }
+class Orm {
+    public:
+      Orm(boost::asio::io_context& io_context, short port);
+    public:
 
-    return 0;
-}
+        void CreateTable();
+        void HandleRequest(std::shared_ptr<boost::asio::ip::tcp::socket> socket);
+};
+
+#endif //SLIM_KUBE_ORM_H
