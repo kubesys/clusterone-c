@@ -18,18 +18,32 @@
  */
 
 #include "apiserver/server.h"
+#include "apiserver/orm.h"
 #include <iostream>
 
-int main() {
-    try {
-        boost::asio::io_context io_context;
-        Server server(io_context, 8080);
+int startAPIServer();
 
-        // 运行IO循环
-        io_context.run();
-    } catch (const std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
-    }
+int main() {
+//    return startAPIServer();
+    std::string connection_string = "postgresql://postgres:onceas@139.9.165.93:30306/kine";
+    Orm orm(connection_string);
+
+    // Call the createTable method to create the table
+    orm.CreateTable("test");
 
     return 0;
 }
+
+//int startAPIServer() {
+//    try {
+//        boost::asio::io_context io_context;
+//        Server server(io_context, 8080);
+//
+//        // 运行IO循环
+//        io_context.run();
+//    } catch (const std::exception& e) {
+//        std::cerr << "Exception: " << e.what() << std::endl;
+//    }
+//
+//    return 0;
+//}

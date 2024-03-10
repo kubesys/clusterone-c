@@ -31,7 +31,7 @@ Orm::~Orm() {
     sql_.close();
 }
 
-bool Orm::CreateTable(const std::string &table) {
+bool Orm::CreateTable(const std::string& table) {
     try {
         // Define your table creation SQL statement
         std::string create_table_sql = "CREATE TABLE IF NOT EXISTS " + table + " ("
