@@ -20,16 +20,19 @@
 #ifndef SLIM_KUBE_ORM_H
 #define SLIM_KUBE_ORM_H
 
-#include <boost/asio.hpp>
-#include <libpq-fe.h>
+#include <iostream>
+#include <soci/soci.h>
+#include <soci/postgresql/soci-postgresql.h>
 
 class Orm {
     public:
-      Orm(boost::asio::io_context& io_context, short port);
+        explicit Orm(const std::string& connection_string);
+        ~Orm();
     public:
-
-        void CreateTable();
-        void HandleRequest(std::shared_ptr<boost::asio::ip::tcp::socket> socket);
+        bool CreateTable(const std::string& table);
+    private:
+        std::string connection_string_;
+        soci::session sql_;
 };
 
 #endif //SLIM_KUBE_ORM_H
