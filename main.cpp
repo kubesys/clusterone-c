@@ -25,8 +25,9 @@ int startAPIServer();
 
 int main() {
 //    return startAPIServer();
-    std::string connection_string = "postgresql://postgres:onceas@139.9.165.93:30306/kine";
-    Orm orm(connection_string);
+    //std::string connection_string = "postgresql://postgres:onceas@139.9.165.93:30306/kine";
+	std::string connection_string = "dbname=kine user=postgres password=onceas host=139.9.165.93 port=30306";
+	Orm orm(connection_string);
 
     // Call the createTable method to create the table
     orm.CreateTable("test");
